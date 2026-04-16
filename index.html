@@ -1,0 +1,2133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Darari Ayoub — Ingénieur Automatisme & Supervision Industrielle</title>
+<meta name="description" content="Portfolio de Darari Ayoub, ingénieur en génie électrique, automatisme et supervision industrielle. M2 Grenoble INP UGA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   TOKENS & RESET
+   ═══════════════════════════════════════════════ */
+:root {
+  --bg:        #080c10;
+  --bg2:       #0d1218;
+  --bg3:       #111820;
+  --border:    rgba(0,212,255,.15);
+  --border2:   rgba(0,212,255,.30);
+  --cyan:      #00d4ff;
+  --cyan2:     #00a8cc;
+  --amber:     #f0a500;
+  --amber2:    #ffbf40;
+  --green:     #00ff88;
+  --text:      #c8d8e8;
+  --text2:     #7a9ab8;
+  --text3:     #3d5a72;
+  --white:     #e8f4ff;
+  --danger:    #ff4444;
+  --glow-c:    0 0 20px rgba(0,212,255,.4), 0 0 60px rgba(0,212,255,.15);
+  --glow-a:    0 0 20px rgba(240,165,0,.4),  0 0 60px rgba(240,165,0,.15);
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-main: 'Rajdhani', sans-serif;
+  --font-body: 'IBM Plex Sans', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-weight:400;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+ul{list-style:none}
+
+/* ═══════════════════════════════════════════════
+   BACKGROUND — ANIMATED CIRCUIT GRID
+   ═══════════════════════════════════════════════ */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(0,212,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,.04) 1px, transparent 1px);
+  background-size:50px 50px;
+  pointer-events:none;
+  z-index:0;
+}
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,100,150,.12) 0%, transparent 70%);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* SCANLINES */
+.scanlines{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  background:repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,.08) 2px,
+    rgba(0,0,0,.08) 4px
+  );
+}
+
+/* PARTICLES CANVAS */
+#particles-canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  opacity:.5;
+}
+
+/* ═══════════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════════ */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 40px;
+  height:64px;
+  background:rgba(8,12,16,.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+nav::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),var(--amber),transparent);
+  opacity:.6;
+}
+.nav-brand{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.nav-brand-name{
+  font-family:var(--font-mono);
+  font-size:.85rem;
+  color:var(--cyan);
+  letter-spacing:.1em;
+}
+.nav-brand-tag{
+  font-size:.7rem;
+  color:var(--text3);
+  letter-spacing:.05em;
+  margin-top:2px;
+}
+.nav-signal{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+.nav-links{
+  display:flex;
+  gap:28px;
+}
+.nav-links a{
+  font-family:var(--font-main);
+  font-size:.8rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--text2);
+  transition:color .2s;
+  position:relative;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:-4px;left:0;right:0;
+  height:1px;
+  background:var(--cyan);
+  transform:scaleX(0);
+  transition:transform .2s;
+}
+.nav-links a:hover{color:var(--cyan)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/* ═══════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════ */
+#hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:100px 40px 60px;
+  position:relative;
+  z-index:2;
+}
+.hero-inner{
+  max-width:1100px;
+  margin:0 auto;
+  width:100%;
+}
+.hero-status{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-mono);
+  font-size:.75rem;
+  color:var(--green);
+  border:1px solid rgba(0,255,136,.25);
+  background:rgba(0,255,136,.06);
+  padding:6px 14px;
+  border-radius:2px;
+  margin-bottom:28px;
+  letter-spacing:.06em;
+  animation:fadeInDown .6s ease both;
+}
+.hero-status .dot{
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 8px var(--green);
+  animation:pulse 1.5s infinite;
+}
+h1{
+  font-family:var(--font-main);
+  font-size:clamp(3rem,8vw,7rem);
+  font-weight:700;
+  line-height:1;
+  letter-spacing:-.01em;
+  color:var(--white);
+  margin-bottom:12px;
+  animation:fadeInUp .7s .1s ease both;
+}
+h1 em{
+  font-style:normal;
+  color:var(--cyan);
+  text-shadow:var(--glow-c);
+}
+.hero-title-line{
+  font-family:var(--font-mono);
+  font-size:.85rem;
+  color:var(--text2);
+  margin-bottom:28px;
+  letter-spacing:.05em;
+  animation:fadeInUp .7s .2s ease both;
+}
+.hero-title-line span{color:var(--amber)}
+.hero-desc{
+  font-size:1.05rem;
+  color:var(--text);
+  max-width:680px;
+  margin-bottom:30px;
+  line-height:1.75;
+  animation:fadeInUp .7s .3s ease both;
+}
+.hero-desc strong{color:var(--cyan2)}
+
+/* CHIPS */
+.hero-chips{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-bottom:36px;
+  animation:fadeInUp .7s .4s ease both;
+}
+.chip{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  padding:5px 12px;
+  border-radius:2px;
+  border:1px solid var(--border2);
+  color:var(--text2);
+  background:rgba(0,212,255,.05);
+  letter-spacing:.05em;
+  transition:all .2s;
+}
+.chip:hover{border-color:var(--cyan);color:var(--cyan)}
+.chip.accent{
+  border-color:rgba(240,165,0,.4);
+  color:var(--amber);
+  background:rgba(240,165,0,.07);
+}
+.chip.accent:hover{border-color:var(--amber2);color:var(--amber2)}
+
+/* CTA BUTTONS */
+.hero-cta{
+  display:flex;flex-wrap:wrap;gap:12px;
+  margin-bottom:48px;
+  animation:fadeInUp .7s .5s ease both;
+}
+.btn{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:.85rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:12px 24px;
+  border-radius:2px;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+.btn::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);
+  transform:translateX(-100%);
+  transition:transform .4s;
+}
+.btn:hover::before{transform:translateX(100%)}
+.btn-primary{
+  background:var(--cyan);
+  color:#08121a;
+  border-color:var(--cyan);
+  box-shadow:var(--glow-c);
+}
+.btn-primary:hover{background:var(--cyan2);box-shadow:0 0 30px rgba(0,212,255,.5)}
+.btn-amber{
+  background:var(--amber);
+  color:#08121a;
+  border-color:var(--amber);
+  box-shadow:var(--glow-a);
+}
+.btn-amber:hover{background:var(--amber2)}
+.btn-ghost{
+  border-color:var(--border2);
+  color:var(--text);
+  background:rgba(0,212,255,.05);
+}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* KPI */
+.hero-kpi{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  border:1px solid var(--border);
+  background:var(--border);
+  max-width:600px;
+  animation:fadeInUp .7s .6s ease both;
+}
+.hero-kpi>div{
+  background:var(--bg2);
+  padding:20px 24px;
+  text-align:center;
+  transition:background .2s;
+}
+.hero-kpi>div:hover{background:var(--bg3)}
+.kpi-num{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:1.8rem;
+  color:var(--cyan);
+  text-shadow:var(--glow-c);
+  line-height:1;
+  margin-bottom:4px;
+}
+.kpi-label{
+  font-size:.7rem;
+  color:var(--text3);
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+/* ═══════════════════════════════════════════════
+   SECTIONS
+   ═══════════════════════════════════════════════ */
+.section,.section-full{
+  position:relative;
+  z-index:2;
+  padding:80px 40px;
+}
+.section-full{background:var(--bg2)}
+.inner{max-width:1200px;margin:0 auto}
+.section-header{
+  margin-bottom:56px;
+}
+.section-num{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  color:var(--amber);
+  letter-spacing:.15em;
+  margin-bottom:8px;
+}
+.section-title{
+  font-family:var(--font-main);
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;
+  color:var(--white);
+  letter-spacing:.02em;
+  position:relative;
+  display:inline-block;
+}
+.section-title::after{
+  content:'';
+  position:absolute;
+  bottom:-8px;left:0;
+  width:60px;height:2px;
+  background:var(--cyan);
+  box-shadow:var(--glow-c);
+}
+
+/* ═══════════════════════════════════════════════
+   TIMELINE
+   ═══════════════════════════════════════════════ */
+.timeline{
+  position:relative;
+  max-width:1000px;
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:148px;top:0;bottom:0;
+  width:1px;
+  background:linear-gradient(180deg,transparent,var(--border2) 10%,var(--border2) 90%,transparent);
+}
+.timeline-item{
+  display:grid;
+  grid-template-columns:148px 1fr;
+  gap:0 32px;
+  margin-bottom:48px;
+  position:relative;
+}
+.timeline-item::before{
+  content:'';
+  position:absolute;
+  left:142px;top:24px;
+  width:13px;height:13px;
+  border-radius:50%;
+  background:var(--bg);
+  border:2px solid var(--cyan);
+  box-shadow:var(--glow-c);
+  z-index:1;
+  transition:all .3s;
+}
+.timeline-item:hover::before{
+  background:var(--cyan);
+  transform:scale(1.3);
+}
+.tl-date{
+  text-align:right;
+  padding-right:16px;
+  padding-top:20px;
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text3);
+  line-height:1.7;
+}
+.tl-date strong{
+  display:block;
+  color:var(--amber);
+  font-size:.78rem;
+  margin-bottom:2px;
+}
+.tl-content{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:24px 28px;
+  transition:all .3s;
+  position:relative;
+  overflow:hidden;
+}
+.tl-content::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .4s;
+}
+.tl-content:hover{
+  border-color:var(--border2);
+  transform:translateX(4px);
+  box-shadow:0 8px 40px rgba(0,0,0,.4);
+}
+.tl-content:hover::before{transform:scaleX(1)}
+.tl-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:8px;
+  flex-wrap:wrap;
+}
+.tl-logo{
+  height:28px;
+  width:auto;
+  object-fit:contain;
+  filter:brightness(.8) grayscale(.3);
+  transition:filter .2s;
+}
+.tl-content:hover .tl-logo{filter:brightness(1) grayscale(0)}
+.tl-logo-placeholder{display:none}
+.tl-company{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:1rem;
+  color:var(--white);
+  letter-spacing:.05em;
+}
+.tl-role{
+  font-size:.8rem;
+  color:var(--cyan);
+  font-family:var(--font-mono);
+  margin-bottom:16px;
+  letter-spacing:.04em;
+}
+.tl-tasks{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:20px;
+}
+.tl-tasks li{
+  font-size:.88rem;
+  color:var(--text);
+  padding-left:16px;
+  position:relative;
+  line-height:1.55;
+}
+.tl-tasks li::before{
+  content:'›';
+  position:absolute;
+  left:0;
+  color:var(--cyan);
+  font-family:var(--font-mono);
+}
+.tl-tasks strong{color:var(--amber2)}
+
+/* DOC LINKS */
+.tl-docs,.project-media,.comp-docs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:16px;
+}
+.doc-link{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:.78rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:8px 16px;
+  border-radius:2px;
+  border:1px solid rgba(0,212,255,.5);
+  color:var(--cyan);
+  background:rgba(0,212,255,.08);
+  transition:all .25s;
+  position:relative;
+  overflow:hidden;
+}
+.doc-link::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:var(--cyan);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s;
+  z-index:0;
+}
+.doc-link>*{position:relative;z-index:1}
+.doc-link:hover{color:#08121a;border-color:var(--cyan);box-shadow:var(--glow-c)}
+.doc-link:hover::before{transform:scaleX(1)}
+.doc-link.doc-amber{
+  border-color:rgba(240,165,0,.5);
+  color:var(--amber);
+  background:rgba(240,165,0,.08);
+}
+.doc-link.doc-amber::before{background:var(--amber)}
+.doc-link.doc-amber:hover{box-shadow:var(--glow-a)}
+.doc-icon{font-size:.9rem}
+
+/* ═══════════════════════════════════════════════
+   PROJECTS GRID
+   ═══════════════════════════════════════════════ */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:24px;
+  max-width:1200px;
+}
+.project-card{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  transition:all .35s cubic-bezier(.2,.8,.2,1);
+  transform-style:preserve-3d;
+  perspective:800px;
+}
+.project-card:hover{
+  border-color:var(--border2);
+  transform:translateY(-6px) rotateX(2deg);
+  box-shadow:0 20px 60px rgba(0,0,0,.5), 0 0 30px rgba(0,212,255,.08);
+}
+
+/* IMAGE GALLERY */
+.project-cover{
+  position:relative;
+  height:200px;
+  overflow:hidden;
+  background:var(--bg2);
+}
+.gallery-container{
+  position:relative;
+  width:100%;
+  height:100%;
+}
+.gallery-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity .8s ease;
+}
+.gallery-slide.active{opacity:1}
+.gallery-slide img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform 6s ease;
+}
+.gallery-slide.active img{transform:scale(1.05)}
+.gallery-dots{
+  position:absolute;
+  bottom:8px;left:50%;
+  transform:translateX(-50%);
+  display:flex;gap:5px;
+  z-index:3;
+}
+.gallery-dot{
+  width:5px;height:5px;
+  border-radius:50%;
+  background:rgba(255,255,255,.4);
+  transition:all .3s;
+  cursor:pointer;
+}
+.gallery-dot.active{
+  background:var(--cyan);
+  box-shadow:0 0 6px var(--cyan);
+  width:14px;
+  border-radius:3px;
+}
+.project-cover-badge{
+  position:absolute;
+  top:12px;right:12px;
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  letter-spacing:.1em;
+  padding:4px 10px;
+  border-radius:2px;
+  z-index:4;
+  text-transform:uppercase;
+}
+.badge-innovant{background:rgba(0,255,136,.15);color:var(--green);border:1px solid rgba(0,255,136,.3)}
+.badge-industriel{background:rgba(0,212,255,.12);color:var(--cyan);border:1px solid var(--border2)}
+.badge-academique{background:rgba(240,165,0,.12);color:var(--amber);border:1px solid rgba(240,165,0,.3)}
+.badge-leadership{background:rgba(180,100,255,.12);color:#c080ff;border:1px solid rgba(180,100,255,.3)}
+
+/* Gradient overlay on image */
+.project-cover::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:60px;
+  background:linear-gradient(transparent,var(--bg3));
+  z-index:2;
+  pointer-events:none;
+}
+.project-body{
+  padding:20px 22px 22px;
+}
+.project-title{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:1.05rem;
+  color:var(--white);
+  margin-bottom:10px;
+  letter-spacing:.03em;
+}
+.project-desc{
+  font-size:.84rem;
+  color:var(--text2);
+  line-height:1.6;
+  margin-bottom:14px;
+}
+.project-desc strong{color:var(--cyan2)}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.project-tag{
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  padding:3px 9px;
+  border-radius:2px;
+  border:1px solid var(--border);
+  color:var(--text3);
+  letter-spacing:.05em;
+}
+.project-tag.highlight{
+  border-color:rgba(0,212,255,.35);
+  color:var(--cyan2);
+  background:rgba(0,212,255,.07);
+}
+
+/* ═══════════════════════════════════════════════
+   COMPETITIONS
+   ═══════════════════════════════════════════════ */
+.comp-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:24px;
+  max-width:1200px;
+}
+.comp-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  transition:all .3s;
+}
+.comp-card:hover{
+  border-color:var(--border2);
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(0,0,0,.4);
+}
+.comp-photos,.comp-photo-single{
+  height:200px;
+  overflow:hidden;
+  position:relative;
+}
+.comp-photos{display:flex}
+.comp-photos img{
+  width:50%;height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+}
+.comp-photo-single img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+}
+.comp-card:hover .comp-photos img,
+.comp-card:hover .comp-photo-single img{transform:scale(1.05)}
+.comp-body{padding:20px 22px}
+.comp-rank{
+  font-family:var(--font-mono);
+  font-size:2.4rem;
+  color:var(--amber);
+  text-shadow:var(--glow-a);
+  line-height:1;
+  margin-bottom:6px;
+}
+.comp-rank-suffix{font-size:1.2rem;vertical-align:super}
+.comp-event{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:.98rem;
+  color:var(--white);
+  margin-bottom:4px;
+}
+.comp-org{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  color:var(--text3);
+  margin-bottom:10px;
+  letter-spacing:.04em;
+}
+.comp-desc{font-size:.84rem;color:var(--text2);line-height:1.5;margin-bottom:10px}
+.comp-desc strong{color:var(--amber)}
+
+/* ═══════════════════════════════════════════════
+   SKILLS
+   ═══════════════════════════════════════════════ */
+.skills-wrapper{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+}
+.skill-block{
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:24px;
+  transition:all .3s;
+  position:relative;
+  overflow:hidden;
+}
+.skill-block::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  transform:scaleX(0);
+  transition:transform .4s;
+}
+.skill-block:hover{
+  border-color:var(--border2);
+  transform:translateY(-3px);
+  box-shadow:0 12px 36px rgba(0,0,0,.35);
+}
+.skill-block:hover::before{transform:scaleX(1)}
+.skill-block-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+}
+.skill-icon{font-size:1.2rem}
+.skill-block-title{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:1rem;
+  color:var(--white);
+  letter-spacing:.05em;
+}
+.skill-items{display:flex;flex-wrap:wrap;gap:6px}
+.skill-item{
+  font-family:var(--font-mono);
+  font-size:.7rem;
+  padding:4px 10px;
+  border-radius:2px;
+  border:1px solid var(--border);
+  color:var(--text2);
+  transition:all .2s;
+  cursor:default;
+}
+.skill-item:hover{
+  border-color:var(--cyan);
+  color:var(--cyan);
+  background:rgba(0,212,255,.08);
+}
+
+/* ═══════════════════════════════════════════════
+   EDUCATION & RECOMMANDATIONS
+   ═══════════════════════════════════════════════ */
+.edu-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
+  max-width:1100px;
+}
+.edu-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:24px;
+  transition:all .3s;
+  position:relative;
+}
+.edu-card:hover{
+  border-color:var(--border2);
+  transform:translateY(-3px);
+  box-shadow:0 12px 36px rgba(0,0,0,.3);
+}
+.edu-card.current{
+  border-color:rgba(0,255,136,.3);
+}
+.edu-badge{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  color:var(--green);
+  border:1px solid rgba(0,255,136,.3);
+  padding:2px 8px;
+  border-radius:2px;
+  margin-bottom:10px;
+  letter-spacing:.1em;
+}
+.edu-year{
+  font-family:var(--font-mono);
+  font-size:.75rem;
+  color:var(--amber);
+  margin-bottom:8px;
+  letter-spacing:.06em;
+}
+.edu-degree{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:.95rem;
+  color:var(--white);
+  margin-bottom:6px;
+  line-height:1.3;
+}
+.edu-school{
+  font-size:.8rem;
+  color:var(--text2);
+}
+
+/* LEADERSHIP CARD */
+.assoc-card{
+  max-width:800px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  overflow:hidden;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  margin-bottom:40px;
+  transition:all .3s;
+}
+.assoc-card:hover{
+  border-color:var(--border2);
+  box-shadow:0 16px 48px rgba(0,0,0,.4);
+}
+.assoc-cover{
+  height:100%;
+  min-height:200px;
+  overflow:hidden;
+}
+.assoc-cover img{
+  width:100%;height:100%;
+  object-fit:cover;
+  transition:transform .4s;
+}
+.assoc-card:hover .assoc-cover img{transform:scale(1.05)}
+.assoc-body{padding:24px 26px}
+.assoc-title{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:1.05rem;
+  color:var(--white);
+  margin-bottom:10px;
+}
+.assoc-desc{font-size:.85rem;color:var(--text2);line-height:1.65;margin-bottom:14px}
+.assoc-desc strong{color:var(--cyan2)}
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+   ═══════════════════════════════════════════════ */
+#contact{
+  position:relative;
+  z-index:2;
+  padding:80px 40px;
+  text-align:center;
+  border-top:1px solid var(--border);
+}
+.contact-eyebrow{
+  font-family:var(--font-mono);
+  font-size:.75rem;
+  color:var(--amber);
+  letter-spacing:.15em;
+  margin-bottom:16px;
+}
+.contact-title{
+  font-family:var(--font-main);
+  font-weight:700;
+  font-size:clamp(2rem,5vw,3.5rem);
+  color:var(--white);
+  margin-bottom:12px;
+}
+.contact-sub{
+  font-size:.95rem;
+  color:var(--text2);
+  max-width:560px;
+  margin:0 auto 40px;
+  line-height:1.7;
+}
+.contact-cards{
+  display:flex;
+  flex-wrap:wrap;
+  gap:16px;
+  justify-content:center;
+  max-width:900px;
+  margin:0 auto 40px;
+}
+.contact-card{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:18px 24px;
+  transition:all .3s;
+  min-width:200px;
+}
+.contact-card:hover{
+  border-color:var(--border2);
+  transform:translateY(-3px);
+  box-shadow:var(--glow-c);
+}
+.contact-card-icon{font-size:1.4rem;filter:grayscale(1)}
+.contact-card:hover .contact-card-icon{filter:none}
+.contact-card-label{
+  font-family:var(--font-mono);
+  font-size:.65rem;
+  color:var(--text3);
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.contact-card-value{
+  font-family:var(--font-main);
+  font-weight:600;
+  font-size:.9rem;
+  color:var(--white);
+}
+.dispo-bar{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(0,255,136,.07);
+  border:1px solid rgba(0,255,136,.25);
+  padding:14px 24px;
+  border-radius:2px;
+  max-width:600px;
+  text-align:left;
+}
+.dispo-dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 12px var(--green);
+  animation:pulse 1.5s infinite;
+  flex-shrink:0;
+}
+.dispo-text{
+  font-size:.85rem;
+  color:var(--text);
+}
+.dispo-text strong{color:var(--green)}
+
+/* FOOTER */
+footer{
+  position:relative;
+  z-index:2;
+  border-top:1px solid var(--border);
+  padding:24px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--bg);
+}
+.footer-brand{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text3);
+}
+.footer-links{display:flex;gap:20px}
+.footer-links a{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  color:var(--text3);
+  transition:color .2s;
+}
+.footer-links a:hover{color:var(--cyan)}
+
+/* ═══════════════════════════════════════════════
+   REVEAL ANIMATIONS
+   ═══════════════════════════════════════════════ */
+.reveal{
+  opacity:0;
+  transform:translateY(28px);
+  transition:opacity .65s ease, transform .65s ease;
+}
+.reveal.in-view{
+  opacity:1;
+  transform:translateY(0);
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(-12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* PROGRESS BAR */
+.reading-bar{
+  position:fixed;
+  top:0;left:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--amber));
+  z-index:200;
+  transition:width .1s;
+  box-shadow:0 0 8px var(--cyan);
+}
+
+/* ═══════════════════════════════════════════════
+   SECTION DIVIDER
+   ═══════════════════════════════════════════════ */
+.divider{
+  position:relative;
+  z-index:2;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border2),transparent);
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  #hero{padding:100px 20px 60px}
+  .hero-kpi{grid-template-columns:repeat(2,1fr)}
+  .section,.section-full{padding:60px 20px}
+  .timeline::before{display:none}
+  .timeline-item{grid-template-columns:1fr}
+  .tl-date{text-align:left;padding:0;margin-bottom:6px}
+  .assoc-card{grid-template-columns:1fr}
+  .assoc-cover{height:180px}
+  footer{flex-direction:column;gap:12px;text-align:center}
+}
+@media(max-width:480px){
+  .hero-kpi{grid-template-columns:repeat(2,1fr)}
+  .projects-grid,.comp-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<canvas id="particles-canvas"></canvas>
+<div class="reading-bar" id="readingBar"></div>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-signal"></div>
+    <div>
+      <div class="nav-brand-name">DARARI AYOUB</div>
+      <div class="nav-brand-tag">Automatisme · Supervision Industrielle</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#experience">Expérience</a>
+    <a href="#projets">Projets</a>
+    <a href="#competitions">Distinctions</a>
+    <a href="#competences">Compétences</a>
+    <a href="#formation">Formation</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-inner">
+
+    <div class="hero-status">
+      <span class="dot"></span>
+      Disponible dès le 1er septembre 2026 — Alternance (rythme 2–3 semaines)
+    </div>
+
+    <h1>Darari <em>Ayoub</em></h1>
+    <div class="hero-title-line">
+      M2 Conception des systèmes d'énergie électrique · Grenoble INP UGA &nbsp;|&nbsp; Études Électriques CFA/CFO · Énergies Renouvelables
+    </div>
+
+    <p class="hero-desc">
+      Ingénieur en <strong>génie électrique et énergies renouvelables</strong>, spécialisé dans l'étude et le dimensionnement d'installations électriques MT/BT et hybrides CFA/CFO. Expérience terrain chez <strong>VINCI Energies, OCP et ONEE</strong>. Expertise technique en <strong>bilans de puissance (NFC 15-100)</strong>, conception de <strong>schémas unifilaires</strong> et <strong>audit énergétique</strong>.
+    </p>
+
+    <div class="hero-chips">
+      <span class="chip accent">Caneco BT · Dialux · ETAP</span>
+      <span class="chip accent">AutoCAD · Sketchup</span>
+      <span class="chip accent">Bilan de puissance (NFC 15-100)</span>
+      <span class="chip">Dimensionnement CFA/CFO</span>
+      <span class="chip">Audit Énergétique & Solaire PV</span>
+      <span class="chip">Simulation Économique</span>
+      <span class="chip">Français C1 · Anglais C1 · Arabe natif</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="mailto:darariayoub03@gmail.com" class="btn btn-primary">Envoyer un Email</a>
+      <a href="https://www.linkedin.com/in/ayoub-darari" target="_blank" class="btn btn-amber">LinkedIn</a>
+      <a href="tel:+33644650635" class="btn btn-ghost">+33 6 44 65 06 35</a>
+    </div>
+
+    <div class="hero-kpi">
+      <div>
+        <span class="kpi-num">5</span>
+        <div class="kpi-label">Stages</div>
+      </div>
+      <div>
+        <span class="kpi-num">4</span>
+        <div class="kpi-label">Projets Majeurs</div>
+      </div>
+      <div>
+        <span class="kpi-num">1er</span>
+        <div class="kpi-label">Prix Hackathon</div>
+      </div>
+      <div>
+        <span class="kpi-num">3</span>
+        <div class="kpi-label">Langues</div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="experience">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-num">01 / EXPÉRIENCE</div>
+    <h2 class="section-title">Parcours Professionnel</h2>
+  </div>
+
+  <div class="timeline">
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">
+        <strong>Fév – Août 2026</strong>
+        Stage PFE<br>Ingénieur d'État
+      </div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <span class="tl-company">VINCI Energies</span>
+        </div>
+        <div class="tl-role">Stage PFE d'Ingénieur d'État</div>
+        <ul class="tl-tasks">
+          <li>Diagnostic énergétique et relevés techniques approfondis pour les études et le chiffrage d’installations électriques.</li>
+          <li>Identification de points critiques et conception de solutions d'automatisation pour l'optimisation des systèmes.</li>
+          <li>Intégration des flux réseau industriel entre les équipements de terrain, la supervision et l'ERP.</li>
+          <li>Rédaction technique complète : analyses fonctionnelles, études technico-économiques, protocoles de tests et validation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">
+        <strong>Juil – Sep 2025</strong>
+        Stage<br>Ingénieur d'État
+      </div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <span class="tl-company">Office Chérifien des Phosphates — OCP</span>
+        </div>
+        <div class="tl-role">Stage d'Ingénieur d'État</div>
+        <ul class="tl-tasks">
+          <li>Élaboration du bilan de puissance, audit énergétique et analyse de process industriel.</li>
+          <li>Développement et mise en œuvre d'une stratégie de délestage automatique pour l'optimisation du réseau.</li>
+          <li>Programmation d'automates Schneider M580 et conception d'IHM pour l'optimisation des processus automatisés.</li>
+          <li>Dimensionnement électrique complet et appui technique aux études technico-économiques et chiffrages.</li>
+        </ul>
+        <div class="tl-docs">
+          <a href="assets/experience/ocp/rapport.pdf" target="_blank" class="doc-link">
+            <span class="doc-icon">&#9654;</span> Rapport de stage
+          </a>
+          <a href="assets/experience/ocp/attestation.pdf" target="_blank" class="doc-link doc-amber">
+            <span class="doc-icon">&#9654;</span> Attestation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">
+        <strong>Juil – Août 2024</strong>
+        Stage<br>Ingénieur d'État
+      </div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <span class="tl-company">Office National de l'Électricité et de l'Eau — ONEE</span>
+        </div>
+        <div class="tl-role">Stage d'Ingénieur d'État</div>
+        <ul class="tl-tasks">
+          <li>Analyse et automatisation des systèmes de protection électrique Haute Tension (HT) via PLC Siemens.</li>
+          <li>Étude de la sélectivité, contrôle des relais de protection et fiabilisation des installations.</li>
+          <li>Conception de schémas unifilaires détaillés sous AutoCAD pour les infrastructures électriques.</li>
+        </ul>
+        <div class="tl-docs">
+          <a href="assets/experience/onee/attestation.pdf" target="_blank" class="doc-link doc-amber">
+            <span class="doc-icon">&#9654;</span> Attestation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">
+        <strong>Mai – Juin 2023</strong>
+        Stage PFE<br>Tech. Supérieur
+      </div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <span class="tl-company">Stilenergie</span>
+        </div>
+        <div class="tl-role">Stage PFE de Technicien Supérieur</div>
+        <ul class="tl-tasks">
+          <li>Audit énergétique et dimensionnement de systèmes photovoltaïques (PV) raccordés au réseau.</li>
+          <li>Réalisation du chiffrage détaillé (P1/P2/P3) et simulation économique des gains d'exploitation.</li>
+          <li>Analyse technico-économique comparative pour la sélection optimale des fournisseurs d'équipements.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="tl-date">
+        <strong>Sep 2022</strong>
+        Stage<br>Tech. Supérieur
+      </div>
+      <div class="tl-content">
+        <div class="tl-header">
+          <span class="tl-company">Green Energy Park</span>
+        </div>
+        <div class="tl-role">Stage Technicien Supérieur</div>
+        <ul class="tl-tasks">
+          <li>Dimensionnement de l'installation électrique CFO pour un procédé thermique industriel.</li>
+          <li>Étude d'intégration de l'énergie photovoltaïque pour l'alimentation du système.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PROJETS ═══ -->
+<section id="projets">
+<div class="section-full">
+<div class="inner">
+  <div class="section-header reveal">
+    <div class="section-num">02 / PROJETS</div>
+    <h2 class="section-title">Projets Techniques</h2>
+  </div>
+
+  <div class="projects-grid">
+
+    <!-- Drone -->
+    <div class="project-card reveal">
+      <div class="project-cover">
+        <div class="gallery-container" data-images='["assets/projets/drone/cover.png","assets/projets/drone/team.jpg"]'>
+          <div class="gallery-slide active"><img src="assets/projets/drone/cover.png" alt="Drone Vision IA"></div>
+          <div class="gallery-slide"><img src="assets/projets/drone/team.jpg" alt="Equipe Drone"></div>
+          <div class="gallery-dots"></div>
+        </div>
+        <span class="project-cover-badge badge-innovant">Projet Innovant</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Drone Intelligent — Identification Temps Réel</div>
+        <p class="project-desc">
+          Drone intégrant <strong>vision par ordinateur</strong> (OpenCV, YOLO) et <strong>IoT</strong> pour l'identification d'individus en temps réel. Interface web de supervision via protocole MQTT.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Vision par ordinateur</span>
+          <span class="project-tag highlight">IoT / MQTT</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">OpenCV</span>
+          <span class="project-tag">YOLO</span>
+          <span class="project-tag">Raspberry Pi</span>
+        </div>
+        <div class="project-media">
+          <a href="assets/projets/drone/interface ai (2).mp4" target="_blank" class="doc-link">
+            &#9654; Interface IA
+          </a>
+          <a href="assets/projets/drone/Presentation.pdf" target="_blank" class="doc-link">
+            &#9654; Présentation
+          </a>
+          <a href="assets/projets/drone/interface.mp4" target="_blank" class="doc-link doc-amber">
+            &#9654; Vidéo démo
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hybride -->
+    <div class="project-card reveal">
+      <div class="project-cover">
+        <div class="gallery-container" data-images='["assets/projets/hybride/cover.png","assets/projets/hybride/schema.png","assets/projets/hybride/ihm.png"]'>
+          <div class="gallery-slide active"><img src="assets/projets/hybride/cover.png" alt="Installation hybride"></div>
+          <div class="gallery-slide"><img src="assets/projets/hybride/schema.png" alt="Schéma électrique"></div>
+          <div class="gallery-slide"><img src="assets/projets/hybride/ihm.png" alt="IHM"></div>
+          <div class="gallery-dots"></div>
+        </div>
+        <span class="project-cover-badge badge-industriel">Projet Industriel</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Installation Hybride Groupe Électrogène / PV</div>
+        <p class="project-desc">
+          Dimensionnement d'une installation hybride couplant groupe électrogène et panneaux PV. Supervision <strong>PLC + IHM</strong> pour le contrôle de deux pompes hydrauliques.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag highlight">PLC Supervision</span>
+          <span class="project-tag highlight">Énergie hybride</span>
+          <span class="project-tag">Dimensionnement</span>
+          <span class="project-tag">IHM</span>
+          <span class="project-tag">AutoCAD Electrical</span>
+        </div>
+        <div class="project-media">
+          <a href="assets/projets/hybride/rapport.pdf" target="_blank" class="doc-link">
+            &#9654; Rapport
+          </a>
+          <a href="assets/projets/hybride/schema.png" target="_blank" class="doc-link">
+            &#9654; Schémas électriques
+          </a>
+          <a href="assets/projets/hybride/ihm.png" target="_blank" class="doc-link">
+            &#9654; Capture IHM
+          </a>
+          <a href="assets/projets/hybride/lettre.pdf" target="_blank" class="doc-link doc-amber">
+            &#9654; Lettre recommandation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Yaourt -->
+    <div class="project-card reveal">
+      <div class="project-cover">
+        <div class="gallery-container" data-images='["assets/projets/yaourt/cover.jfif"]'>
+          <div class="gallery-slide active"><img src="assets/projets/yaourt/cover.jfif" alt="Ligne yaourt"></div>
+          <div class="gallery-dots"></div>
+        </div>
+        <span class="project-cover-badge badge-academique">Projet Académique</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Automatisation — Ligne de Production de Yaourt</div>
+        <p class="project-desc">
+          Conception complète : analyse fonctionnelle, <strong>Grafcet</strong> niveaux 1 & 2, programmation <strong>S7-1200 (TIA Portal)</strong> et simulation FluidSIM.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Grafcet</span>
+          <span class="project-tag highlight">S7-1200 / TIA Portal</span>
+          <span class="project-tag">FluidSIM</span>
+          <span class="project-tag">LADDER / FBD</span>
+        </div>
+        <div class="project-media">
+          <a href="assets/projets/yaourt/rapport.pdf" target="_blank" class="doc-link">
+            &#9654; Rapport
+          </a>
+          <a href="assets/projets/yaourt/ladder.pdf" target="_blank" class="doc-link">
+            &#9654; Ladder
+          </a>
+          <a href="assets/projets/yaourt/demo.mkv" target="_blank" class="doc-link doc-amber">
+            &#9654; Simulation
+          </a>
+          <a href="assets/projets/yaourt/schema.pdf" target="_blank" class="doc-link">
+            &#9654; Schéma pneumatique
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- PV -->
+    <div class="project-card reveal">
+      <div class="project-cover">
+        <div class="gallery-container" data-images='["assets/projets/photovoltaique/cover.png"]'>
+          <div class="gallery-slide active"><img src="assets/projets/photovoltaique/cover.png" alt="PV réseau"></div>
+          <div class="gallery-dots"></div>
+        </div>
+        <span class="project-cover-badge badge-industriel">Stage PFE</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Système Photovoltaïque Raccordé au Réseau</div>
+        <p class="project-desc">
+          Dimensionnement, automatisation et supervision d'un système PV raccordé au réseau. Configuration onduleur, interface de suivi temps réel et étude technico-économique.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Énergie solaire PV</span>
+          <span class="project-tag highlight">Supervision SCADA</span>
+          <span class="project-tag">Onduleur</span>
+          <span class="project-tag">Raccordement réseau</span>
+        </div>
+        <div class="project-media">
+          <a href="assets/projets/photovoltaique/rapport.pdf" target="_blank" class="doc-link">
+            &#9654; Rapport
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Protection HT -->
+    <div class="project-card reveal">
+      <div class="project-cover">
+        <div class="gallery-container" data-images='["assets/projets/protection-ht/cover.png","assets/projets/protection-ht/schema.png"]'>
+          <div class="gallery-slide active"><img src="assets/projets/protection-ht/cover.png" alt="Protection HT"></div>
+          <div class="gallery-slide"><img src="assets/projets/protection-ht/schema.png" alt="Schéma protection"></div>
+          <div class="gallery-dots"></div>
+        </div>
+        <span class="project-cover-badge badge-industriel">Stage ONEE</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Automatisation des Protections Électriques HT</div>
+        <p class="project-desc">
+          Automatisation via <strong>PLC Siemens</strong> des protections haute tension. Sélectivité logique, commande numérique et supervision <strong>IHM WinCC</strong>.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Protection HT</span>
+          <span class="project-tag highlight">Siemens TIA Portal</span>
+          <span class="project-tag">WinCC</span>
+          <span class="project-tag">Relais de protection</span>
+        </div>
+        <div class="project-media">
+          <a href="assets/projets/protection-ht/rapport.pdf" target="_blank" class="doc-link">
+            &#9654; Rapport
+          </a>
+          <a href="assets/projets/protection-ht/schema.png" target="_blank" class="doc-link">
+            &#9654; Schéma de protection
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Groupe électrogène OCP -->
+    <div class="project-card reveal">
+      <div class="project-cover">
+        <div class="gallery-container" data-images='["assets/projets/groupe-electrogene/cover.png"]'>
+          <div class="gallery-slide active"><img src="assets/projets/groupe-electrogene/cover.png" alt="Groupe Électrogène OCP"></div>
+          <div class="gallery-dots"></div>
+        </div>
+        <span class="project-cover-badge badge-industriel">Stage OCP</span>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Automatisation Groupe Électrogène — OCP</div>
+        <p class="project-desc">
+          Programmation <strong>Schneider M580</strong> pour la gestion et le contrôle de démarrage/arrêt d'un groupe électrogène via analyse des logigrammes et schémas électriques.
+        </p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Groupe Électrogène</span>
+          <span class="project-tag highlight">Schneider M580</span>
+          <span class="project-tag">Unity Pro XL</span>
+          <span class="project-tag">Logigrammes</span>
+        </div>
+        <div class="project-media">
+          <a href="assets/projets/groupe-electrogene/logigramme.pdf" target="_blank" class="doc-link">
+            &#9654; Logigramme
+          </a>
+          <a href="assets/projets/groupe-electrogene/schema.pdf" target="_blank" class="doc-link">
+            &#9654; Schéma électrique
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ LEADERSHIP ═══ -->
+<section id="experience-associative">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-num">02b / LEADERSHIP</div>
+    <h2 class="section-title">Engagement Associatif</h2>
+  </div>
+
+  <div class="assoc-card reveal">
+    <div class="assoc-cover">
+      <img src="assets/club/cover.png" alt="Club Mécatronique">
+    </div>
+    <div class="assoc-body">
+      <span class="project-cover-badge badge-leadership" style="position:static;display:inline-block;margin-bottom:12px;">Management Technique</span>
+      <div class="assoc-title">Responsable technique — Club Mécatronique, ENSET Mohammedia</div>
+      <p class="assoc-desc">
+        Chef de la Cellule Technique, ayant piloté de multiples projets d'ingénierie innovants en automatisme et robotique. Lettre de recommandation officielle délivrée par Pr. Mohamed RAFIK, parrain officiel du club.<br><br>
+        <strong>Missions :</strong> Pilotage de projets en automatisme et robotique · Coordination des équipes · Organisation d'événements techniques à l'échelle nationale
+      </p>
+      <div class="project-tags" style="margin-bottom:14px">
+        <span class="project-tag highlight">Management d'Équipe</span>
+        <span class="project-tag highlight">Robotique & Automatisme</span>
+        <span class="project-tag">Coordination</span>
+      </div>
+      <div class="tl-docs">
+        <a href="assets/club/attestation.pdf" target="_blank" class="doc-link doc-amber">
+          &#9654; Lettre de Recommandation
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ COMPETITIONS ═══ -->
+<section id="competitions">
+<div class="section-full">
+<div class="inner">
+  <div class="section-header reveal">
+    <div class="section-num">03 / DISTINCTIONS</div>
+    <h2 class="section-title">Compétitions Nationales</h2>
+  </div>
+
+  <div class="comp-grid">
+
+    <div class="comp-card reveal">
+      <div class="comp-photos">
+        <img src="assets/competitions/ensem-aero/photo1.jpeg" alt="Journée Aéronautique ENSEM 1">
+        <img src="assets/competitions/ensem-aero/photo2.jpeg" alt="Journée Aéronautique ENSEM 2">
+      </div>
+      <div class="comp-body">
+        <div class="comp-rank">1<span class="comp-rank-suffix">ère</span></div>
+        <div class="comp-event">Journée Aéronautique — Défis et Opportunités</div>
+        <div class="comp-org">ENSEM Casablanca · Compétition Nationale</div>
+        <div class="comp-desc">Développement de systèmes embarqués et d'automatismes appliqués au secteur aéronautique marocain.</div>
+        <div class="comp-docs">
+          <a href="assets/competitions/ensem-aero/attestation.pdf" target="_blank" class="doc-link doc-amber">
+            &#9654; Attestation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-photo-single">
+        <img src="assets/competitions/ensa-resilience/photo1.jpeg" alt="ENSA El Jadida">
+      </div>
+      <div class="comp-body">
+        <div class="comp-rank">1<span class="comp-rank-suffix">ère</span></div>
+        <div class="comp-event">Compétition Technologique Nationale</div>
+        <div class="comp-org">ENSA El Jadida · Résilience Énergétique</div>
+        <div class="comp-desc">Conception d'un système de supervision et d'automates pour la résilience énergétique face aux catastrophes naturelles.</div>
+        <div class="comp-docs">
+          <a href="assets/competitions/ensa-resilience/attestation.pdf" target="_blank" class="doc-link doc-amber">
+            &#9654; Attestation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-photos">
+        <img src="assets/competitions/ai2sd/photo1.jpeg" alt="AI2SD Hackathon 1">
+        <img src="assets/competitions/ai2sd/photo2.jpeg" alt="AI2SD Hackathon 2">
+      </div>
+      <div class="comp-body">
+        <div class="comp-rank">2<span class="comp-rank-suffix">ème</span></div>
+        <div class="comp-event">AI2SD Hackathon 2025 — Smart Cities</div>
+        <div class="comp-org">Palais des Arts de Tanger · Sous le Haut Patronage de SM le Roi</div>
+        <div class="comp-desc">2ème place parmi 300 projets nationaux. Solutions mécatroniques et IA pour l'automatisation et la transformation urbaine.</div>
+        <div class="comp-docs">
+          <a href="assets/competitions/ai2sd/attestation.pdf" target="_blank" class="doc-link doc-amber">
+            &#9654; Attestation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-photo-single">
+        <img src="assets/competitions/nrc-um6p/photo1.jpeg" alt="NRC UM6P">
+      </div>
+      <div class="comp-body">
+        <div class="comp-rank">2<span class="comp-rank-suffix">ème</span></div>
+        <div class="comp-event">National Robotics Competition (NRC)</div>
+        <div class="comp-org">UM6P — Université Mohammed VI Polytechnique</div>
+        <div class="comp-desc">2ème place face à 40 équipes. Programmation avancée, contrôle-commande et ingénierie robotique.</div>
+        <div class="comp-docs">
+          <a href="assets/competitions/nrc-um6p/attestation.pdf" target="_blank" class="doc-link doc-amber">
+            &#9654; Attestation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-photos">
+        <img src="assets/competitions/ensem-hackathon/photo1.jpeg" alt="Hackathon ENSEM 1">
+        <img src="assets/competitions/ensem-hackathon/photo2.jpeg" alt="Hackathon ENSEM 2">
+      </div>
+      <div class="comp-body">
+        <div class="comp-rank">2<span class="comp-rank-suffix">ème</span></div>
+        <div class="comp-event">Hackathon ENSEM Entreprise — IA & Mutation Énergétique</div>
+        <div class="comp-org">ENSEM Casablanca</div>
+        <div class="comp-desc">2ème place sur 40 équipes. Couplage de l'automatisme industriel et de l'IA pour l'optimisation des systèmes énergétiques.</div>
+        <div class="comp-docs">
+          <a href="assets/competitions/ensem-hackathon/attestation.pdf" target="_blank" class="doc-link doc-amber">
+            &#9654; Attestation
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="comp-card reveal">
+      <div class="comp-photo-single">
+        <img src="assets/competitions/prise-de-parole/photo1.png" alt="Prise de parole">
+      </div>
+      <div class="comp-body">
+        <div class="comp-rank" style="font-size:1.6rem;color:var(--text2);">1/2 Finaliste</div>
+        <div class="comp-event">Prise de Parole en Public — Anglais</div>
+        <div class="comp-org">ENSET · Compétition nationale d'éloquence</div>
+        <div class="comp-desc">Présentation de concepts complexes d'ingénierie et de mécatronique devant un jury d'experts en langue anglaise.</div>
+        <div class="comp-docs">
+          <a href="assets/competitions/prise-de-parole/attestation.pdf" target="_blank" class="doc-link">
+            &#9654; Certificat
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ COMPÉTENCES ═══ -->
+<section id="competences">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-num">04 / COMPÉTENCES</div>
+    <h2 class="section-title">Compétences Techniques</h2>
+  </div>
+
+  <div class="skills-wrapper">
+
+    <div class="skill-block reveal">
+      <div class="skill-block-header">
+        <span class="skill-icon">&#9881;</span>
+        <div class="skill-block-title">Programmation PLC</div>
+      </div>
+      <div class="skill-items">
+        <span class="skill-item">Siemens S7-300/400/1200/1500</span>
+        <span class="skill-item">Schneider M340/M580</span>
+        <span class="skill-item">Allen-Bradley</span>
+        <span class="skill-item">SCL</span>
+        <span class="skill-item">LADDER</span>
+        <span class="skill-item">FBD</span>
+        <span class="skill-item">LIST</span>
+        <span class="skill-item">Grafcet</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-header">
+        <span class="skill-icon">&#128187;</span>
+        <div class="skill-block-title">Supervision & SCADA</div>
+      </div>
+      <div class="skill-items">
+        <span class="skill-item">TIA Portal</span>
+        <span class="skill-item">SIMATIC WinCC</span>
+        <span class="skill-item">Wonderware</span>
+        <span class="skill-item">Citect SCADA</span>
+        <span class="skill-item">Vijeo Designer</span>
+        <span class="skill-item">LabVIEW</span>
+        <span class="skill-item">Unity Pro XL</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-header">
+        <span class="skill-icon">&#128268;</span>
+        <div class="skill-block-title">Protocoles & Réseaux</div>
+      </div>
+      <div class="skill-items">
+        <span class="skill-item">Modbus RTU / TCP</span>
+        <span class="skill-item">Profinet</span>
+        <span class="skill-item">OPC UA</span>
+        <span class="skill-item">MQTT</span>
+        <span class="skill-item">Ethernet Industriel</span>
+        <span class="skill-item">Intégration IT/OT</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-header">
+        <span class="skill-icon">&#9881;</span>
+        <div class="skill-block-title">Développement & Data</div>
+      </div>
+      <div class="skill-items">
+        <span class="skill-item">Python</span>
+        <span class="skill-item">JavaScript</span>
+        <span class="skill-item">C / C++</span>
+        <span class="skill-item">Excel VBA</span>
+        <span class="skill-item">SQL</span>
+        <span class="skill-item">Power BI</span>
+        <span class="skill-item">OpenCV / YOLO</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-header">
+        <span class="skill-icon">&#9889;</span>
+        <div class="skill-block-title">Énergie & Instrumentation</div>
+      </div>
+      <div class="skill-items">
+        <span class="skill-item">Systèmes PV raccordés réseau</span>
+        <span class="skill-item">Protection électrique HT</span>
+        <span class="skill-item">Capteurs & transducteurs</span>
+        <span class="skill-item">Chaînes de mesure</span>
+        <span class="skill-item">Étalonnage</span>
+        <span class="skill-item">Variateurs de vitesse</span>
+      </div>
+    </div>
+
+    <div class="skill-block reveal">
+      <div class="skill-block-header">
+        <span class="skill-icon">&#128208;</span>
+        <div class="skill-block-title">Outils & Méthodes</div>
+      </div>
+      <div class="skill-items">
+        <span class="skill-item">AutoCAD Electrical</span>
+        <span class="skill-item">MS Project</span>
+        <span class="skill-item">FluidSIM</span>
+        <span class="skill-item">UML</span>
+        <span class="skill-item">Cybersécurité OT</span>
+        <span class="skill-item">Industrie 4.0</span>
+        <span class="skill-item">Smart Factory</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FORMATION ═══ -->
+<section id="formation">
+<div class="section-full">
+<div class="inner">
+  <div class="section-header reveal">
+    <div class="section-num">05 / FORMATION</div>
+    <h2 class="section-title">Parcours Académique</h2>
+  </div>
+
+  <div class="edu-grid">
+
+    <div class="edu-card current reveal">
+      <span class="edu-badge">EN COURS</span>
+      <div class="edu-year">2026 – 2027</div>
+      <div class="edu-degree">Master 2 — Conception des Systèmes d'Énergie Électrique</div>
+      <div class="edu-school">Institut Polytechnique / Université Grenoble Alpes (INP-UGA)</div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">2023 – 2026</div>
+      <div class="edu-degree">Cycle Ingénieur d'État — Génie Électrique & Énergie Renouvelable</div>
+      <div class="edu-school">ENSET — École Normale Supérieure de l'Enseignement Technique, Mohammedia</div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">2021 – 2023</div>
+      <div class="edu-degree">DUT — Génie Thermique et Énergétique</div>
+      <div class="edu-school">EST Fès — École Supérieure de Technologie</div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">2021</div>
+      <div class="edu-degree">Baccalauréat — Sciences et Technologies Électriques</div>
+      <div class="edu-school">Lycée Hassan 2, Marrakech</div>
+    </div>
+
+  </div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ RECOMMANDATIONS ═══ -->
+<section id="recommandations">
+<div class="section">
+  <div class="section-header reveal">
+    <div class="section-num">06 / DOSSIER</div>
+    <h2 class="section-title">Recommandations & Certifications</h2>
+  </div>
+
+  <div class="edu-grid">
+
+    <div class="edu-card reveal">
+      <div class="edu-year">Excellence Académique</div>
+      <div class="edu-degree">Lettre de Recommandation — Ingénierie</div>
+      <div class="edu-school">Professeur / Encadrant — ENSET Mohammedia</div>
+      <div class="tl-docs" style="margin-top:14px">
+        <a href="assets/docs/lettre1.pdf" target="_blank" class="doc-link">
+          &#9654; Voir la lettre
+        </a>
+      </div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">Excellence Académique</div>
+      <div class="edu-degree">Lettre de Recommandation — Projets Techniques</div>
+      <div class="edu-school">Professeur / Encadrant — ENSET Mohammedia</div>
+      <div class="tl-docs" style="margin-top:14px">
+        <a href="assets/docs/lettre2.pdf" target="_blank" class="doc-link">
+          &#9654; Voir la lettre
+        </a>
+      </div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">Excellence Académique</div>
+      <div class="edu-degree">Lettre de Recommandation — Parcours DUT</div>
+      <div class="edu-school">Professeur / Encadrant — EST Fès</div>
+      <div class="tl-docs" style="margin-top:14px">
+        <a href="assets/docs/lettre3.pdf" target="_blank" class="doc-link">
+          &#9654; Voir la lettre
+        </a>
+      </div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">Excellence Hors Académique</div>
+      <div class="edu-degree">Lettre de Recommandation — Leadership & Management</div>
+      <div class="edu-school">Pr. Mohamed RAFIK — ENSET</div>
+      <div class="tl-docs" style="margin-top:14px">
+        <a href="assets/docs/lettre4.pdf" target="_blank" class="doc-link doc-amber">
+          &#9654; Voir la lettre
+        </a>
+      </div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">Compétence Linguistique</div>
+      <div class="edu-degree">Attestation de Maîtrise de l'Anglais</div>
+      <div class="edu-school">Communication technique et courante</div>
+      <div class="tl-docs" style="margin-top:14px">
+        <a href="assets/docs/attestation.pdf" target="_blank" class="doc-link">
+          &#9654; Voir l'attestation
+        </a>
+      </div>
+    </div>
+
+    <div class="edu-card reveal">
+      <div class="edu-year">Diplôme Universitaire</div>
+      <div class="edu-degree">Diplôme DUT — Génie Thermique et Énergétique</div>
+      <div class="edu-school">EST Fès — Validé avec mention</div>
+      <div class="tl-docs" style="margin-top:14px">
+        <a href="assets/docs/dut.pdf" target="_blank" class="doc-link">
+          &#9654; Voir le diplôme
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-eyebrow">// CONTACT</div>
+  <div class="contact-title">Travaillons ensemble</div>
+  <p class="contact-sub">
+    Ingénieur en génie électrique et énergies renouvelables et CFA/CFO, disponible en alternance
+    (rythme 2–3 semaines) dès le 1er septembre 2026. Basé à Grenoble, mobilité nationale.
+  </p>
+
+  <div class="contact-cards">
+    <a href="mailto:darariayoub03@gmail.com" class="contact-card">
+      <span class="contact-card-icon">&#9993;</span>
+      <div>
+        <div class="contact-card-label">Email</div>
+        <div class="contact-card-value">darariayoub03@gmail.com</div>
+      </div>
+    </a>
+    <a href="tel:+33644650635" class="contact-card">
+      <span class="contact-card-icon">&#128222;</span>
+      <div>
+        <div class="contact-card-label">Téléphone</div>
+        <div class="contact-card-value">+33 6 44 65 06 35</div>
+      </div>
+    </a>
+    <a href="https://www.linkedin.com/in/ayoub-darari" target="_blank" class="contact-card">
+      <span class="contact-card-icon">&#128188;</span>
+      <div>
+        <div class="contact-card-label">LinkedIn</div>
+        <div class="contact-card-value">linkedin.com/in/ayoub-darari</div>
+      </div>
+    </a>
+    <div class="contact-card" style="cursor:default">
+      <span class="contact-card-icon">&#128205;</span>
+      <div>
+        <div class="contact-card-label">Localisation</div>
+        <div class="contact-card-value">Grenoble · Mobilité nationale · Permis B</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dispo-bar">
+    <div class="dispo-dot"></div>
+    <div class="dispo-text">
+      <strong>Disponible dès le 1er septembre 2026</strong> — Recherche une alternance
+      en étude électrique et énergies renouvelables, rythme 2–3 semaines.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-brand">
+    <span style="font-family:var(--font-mono);color:var(--cyan)">DARARI AYOUB</span>
+    <span style="color:var(--text3);margin-left:8px">© 2026</span>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:darariayoub03@gmail.com">Email</a>
+    <a href="tel:+33644650635">Téléphone</a>
+    <a href="https://www.linkedin.com/in/ayoub-darari" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+     JAVASCRIPT
+     ═══════════════════════════════════════════════ -->
+<script>
+/* ── READING PROGRESS BAR ── */
+window.addEventListener('scroll',()=>{
+  const el=document.getElementById('readingBar');
+  const h=document.documentElement;
+  const pct=(h.scrollTop||document.body.scrollTop)/(h.scrollHeight-h.clientHeight)*100;
+  el.style.width=Math.min(pct,100)+'%';
+});
+
+/* ── REVEAL ON SCROLL ── */
+(()=>{
+  const items=document.querySelectorAll('.reveal');
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>e.target.classList.add('in-view'), i*60);
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  items.forEach(el=>obs.observe(el));
+})();
+
+/* ── IMAGE GALLERIES ── */
+(()=>{
+  document.querySelectorAll('.gallery-container').forEach(gc=>{
+    const slides=gc.querySelectorAll('.gallery-slide');
+    if(!slides.length) return;
+    const dotsEl=gc.querySelector('.gallery-dots');
+    let cur=0,timer=null;
+
+    // build dots
+    slides.forEach((_,i)=>{
+      const d=document.createElement('div');
+      d.className='gallery-dot'+(i===0?' active':'');
+      d.addEventListener('click',()=>goTo(i));
+      dotsEl.appendChild(d);
+    });
+    const dots=dotsEl.querySelectorAll('.gallery-dot');
+
+    function goTo(n){
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      cur=(n+slides.length)%slides.length;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+    }
+    function next(){goTo(cur+1)}
+
+    if(slides.length>1){
+      timer=setInterval(next,3500);
+      gc.addEventListener('mouseenter',()=>clearInterval(timer));
+      gc.addEventListener('mouseleave',()=>{timer=setInterval(next,3500)});
+    }
+  });
+})();
+
+/* ── PARTICLES BACKGROUND ── */
+(()=>{
+  const canvas=document.getElementById('particles-canvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+
+  function resize(){
+    W=canvas.width=window.innerWidth;
+    H=canvas.height=window.innerHeight;
+  }
+  window.addEventListener('resize',resize);
+  resize();
+
+  const N=60;
+  for(let i=0;i<N;i++){
+    particles.push({
+      x:Math.random()*1920,
+      y:Math.random()*1080,
+      vx:(Math.random()-.5)*.35,
+      vy:(Math.random()-.5)*.35,
+      r:Math.random()*1.5+.5,
+      a:Math.random()*.6+.2,
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(0,212,255,${p.a*.6})`;
+      ctx.fill();
+    });
+    // draw connections
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(0,212,255,${(1-d/120)*.12})`;
+          ctx.lineWidth=.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── 3D TILT ON PROJECT CARDS ── */
+document.querySelectorAll('.project-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    const y=(e.clientY-r.top)/r.height-.5;
+    card.style.transform=`translateY(-6px) rotateX(${-y*6}deg) rotateY(${x*6}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='';
+  });
+});
+
+/* ── NAV ACTIVE LINKS ── */
+(()=>{
+  const sections=document.querySelectorAll('section[id]');
+  const links=document.querySelectorAll('.nav-links a');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(l=>l.style.color='');
+        const active=document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+        if(active)active.style.color='var(--cyan)';
+      }
+    });
+  },{threshold:.4});
+  sections.forEach(s=>obs.observe(s));
+})();
+</script>
+</body>
+</html>
